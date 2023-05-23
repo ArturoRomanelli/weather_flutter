@@ -1,6 +1,6 @@
 class Location {
   const Location({
-    required this.name,
+    required this.cityName,
     required this.lat,
     required this.long,
   });
@@ -11,6 +11,6 @@ class Location {
   /// Longitude of this place
   final double long;
 
-  /// A human-readable name of this place
-  final String name;
+  /// City name
+  final String cityName;
 }
