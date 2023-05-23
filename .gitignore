@@ -45,3 +45,7 @@ app.*.map.json
 
 # API settings file
 api.json
+
+# Dart-related settings
+*.freezed.dart
+*.g.dart
