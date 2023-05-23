@@ -1,15 +1,15 @@
-// import 'package:weather_flutter/src/forecast/data/repository/forecast_weather_repository.dart';
-// import 'package:weather_flutter/src/forecast/domain/entities/forecast_weather.dart';
+import '../../data/repository/forecast_weather_repository.dart';
+import '../adapters/forecast_weather_from_dto.dart';
+import '../entities/forecast_weather.dart';
+import '../entities/location.dart';
 
-// import '../entities/location.dart';
+class ForecastWeatherService {
+  const ForecastWeatherService(this.repository);
+  final ForecastWeatherRepository repository;
 
-// class ForecastWeatherService {
-//   const ForecastWeatherService(this.repository);
-//   final ForecastWeatherRepository repository;
+  Future<ForecastWeather> getForecastWeather(Location location, int days) async {
+    final result = await repository.getForecastWeather(location.cityName, days);
 
-//   Future<ForecastWeather> getForecastWeather(Location location, int days) async {
-//     final result = await repository.getForecastWeather(location.cityName, days);
-
-//     result.toDomain();
-//   }
-// }
+    return result.toDomain();
+  }
+}
