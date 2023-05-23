@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:weather_flutter/core/json.dart';
+
+import '../../../../core/json.dart';
 
 part 'condition_dto.freezed.dart';
 part 'condition_dto.g.dart';
