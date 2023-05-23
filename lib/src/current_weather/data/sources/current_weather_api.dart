@@ -5,10 +5,11 @@ class CurrentWeatherApi {
   const CurrentWeatherApi(this.dio);
   final Dio dio;
 
-  Future<Json> current(String city) async {
-    final result = await dio.get<Json>(
+  /// Accepts a query q and returns the current weather
+  Future<JSON> current(String q) async {
+    final result = await dio.get<JSON>(
       '/current.json',
-      queryParameters: {'q': city},
+      queryParameters: {'q': q},
     );
 
     final data = result.data!;
