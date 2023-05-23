@@ -11,11 +11,12 @@ part 'day_dto.g.dart';
 @freezed
 class DayDto with _$DayDto {
   const factory DayDto({
+    required double avgtempC,
+    required ConditionDto condition,
     double? maxtempC,
     double? maxtempF,
     double? mintempC,
     double? mintempF,
-    required double avgtempC,
     double? avgtempF,
     double? maxwindMph,
     int? maxwindKph,
@@ -29,7 +30,6 @@ class DayDto with _$DayDto {
     int? dailyChanceOfRain,
     int? dailyWillItSnow,
     int? dailyChanceOfSnow,
-    required ConditionDto condition,
     int? uv,
   }) = _DayDto;
   factory DayDto.fromJson(JSON json) => _$DayDtoFromJson(json);

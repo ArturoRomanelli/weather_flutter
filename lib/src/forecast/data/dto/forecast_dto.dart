@@ -8,9 +8,9 @@ part 'forecast_dto.g.dart';
 
 @freezed
 class ForecastDto with _$ForecastDto {
-  const factory ForecastDto(
-    List<ForecastDayDto>? forecastday,
-  ) = _ForecastDto;
+  const factory ForecastDto({
+    @Default([]) Iterable<ForecastDayDto> forecastday,
+  }) = _ForecastDto;
 
   factory ForecastDto.fromJson(JSON json) => _$ForecastDtoFromJson(json);
 }

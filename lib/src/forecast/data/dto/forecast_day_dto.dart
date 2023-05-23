@@ -12,8 +12,8 @@ part 'forecast_day_dto.g.dart';
 class ForecastDayDto with _$ForecastDayDto {
   const factory ForecastDayDto({
     required DateTime date,
-    int? dateEpoch,
     required DayDto day,
+    int? dateEpoch,
     AstroDto? astro,
     List<HourDto>? hour,
   }) = _ForecastDayDto;
