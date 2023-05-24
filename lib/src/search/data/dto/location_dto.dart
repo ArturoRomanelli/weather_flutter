@@ -7,14 +7,14 @@ part 'location_dto.g.dart';
 
 @freezed
 class LocationDto with _$LocationDto {
-  const factory LocationDto(
+  const factory LocationDto({
+    required String name,
     int? id,
-    String? name,
     String? region,
     String? country,
     double? lat,
     double? lon,
     String? url,
-  ) = _LocationDto;
+  }) = _LocationDto;
   factory LocationDto.fromJson(JSON json) => _$LocationDtoFromJson(json);
 }

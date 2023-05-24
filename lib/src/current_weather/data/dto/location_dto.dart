@@ -8,7 +8,7 @@ part 'location_dto.g.dart';
 @freezed
 class LocationDto with _$LocationDto {
   const factory LocationDto({
-    String? name,
+    required String name,
     String? region,
     String? country,
     double? lat,
