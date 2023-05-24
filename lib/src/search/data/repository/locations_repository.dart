@@ -6,9 +6,7 @@ class LocationsRepository {
   final LocationsApi api;
 
   Future<LocationsDto> getLocations(String search) async {
-    final result = await api.locations(
-      q: search,
-    );
+    final result = await api.locations(q: search);
 
     return LocationsDto.fromJson(result);
   }

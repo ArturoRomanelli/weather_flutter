@@ -11,5 +11,6 @@ class LocationsDto with _$LocationsDto {
   const factory LocationsDto({
     @Default([]) Iterable<LocationDto> locations,
   }) = _LocationsDto;
+
   factory LocationsDto.fromJson(JSON json) => _$LocationsDtoFromJson(json);
 }
