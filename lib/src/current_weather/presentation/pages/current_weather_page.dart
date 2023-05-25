@@ -38,7 +38,7 @@ class CurrentWeatherPage extends HookConsumerWidget {
               data: (data) => [
                 const Text('Il meteo di oggi!'),
                 const SizedBox(height: 20),
-                Image.network('<immagine>'),
+                Image.network(data.image),
                 const SizedBox(height: 20),
                 Text(data.weather),
                 Text('${data.temp}')
