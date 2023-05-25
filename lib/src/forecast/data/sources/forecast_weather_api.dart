@@ -1,6 +1,16 @@
 import 'package:dio/dio.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:weather_flutter/client/dio.dart';
 
 import '../../../../core/json.dart';
+
+part 'forecast_weather_api.g.dart';
+
+@riverpod
+ForecastWeatherApi forecastWeatherApi(ForecastWeatherApiRef ref) {
+  final client = ref.watch(httpClientProvider);
+  return ForecastWeatherApi(client);
+}
 
 class ForecastWeatherApi {
   const ForecastWeatherApi(this.dio);
