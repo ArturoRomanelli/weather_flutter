@@ -6,5 +6,6 @@ extension CurrentWeatherFromDto on CurrentWeatherDto {
         temp: current.tempC.toInt(),
         weather: current.condition.text,
         updatedAt: current.lastUpdated,
+        image: current.condition.icon,
       );
 }

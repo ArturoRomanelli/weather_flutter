@@ -3,6 +3,7 @@ class CurrentWeather {
     required this.temp,
     required this.weather,
     required this.updatedAt,
+    required this.image,
   });
 
   /// our current temperature
@@ -13,4 +14,7 @@ class CurrentWeather {
 
   /// latest update of the weather condition
   final DateTime updatedAt;
+
+  /// a string containing the image url
+  final String image;
 }
