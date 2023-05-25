@@ -9,7 +9,7 @@ part 'condition_dto.g.dart';
 class ConditionDto with _$ConditionDto {
   const factory ConditionDto({
     required String text,
-    String? icon,
+    required String icon,
     int? code,
   }) = _ConditionDto;
   factory ConditionDto.fromJson(JSON json) => _$ConditionDtoFromJson(json);
