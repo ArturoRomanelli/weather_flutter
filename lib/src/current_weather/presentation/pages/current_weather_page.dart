@@ -18,6 +18,7 @@ class CurrentWeatherPage extends HookConsumerWidget {
       appBar: AppBar(title: const Text('La mia App')),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: controller,
@@ -33,12 +34,28 @@ class CurrentWeatherPage extends HookConsumerWidget {
               ),
             ),
             const SizedBox(height: 40),
-            const Text('Il meteo di oggi!'),
-            const SizedBox(height: 20),
-            Image.network('<immagine>'),
-            const SizedBox(height: 20),
-            const Text('<previsione>'),
-            const Text('<temperatura>')
+            ...currentWeather.when(
+              data: (data) => [
+                const Text('Il meteo di oggi!'),
+                const SizedBox(height: 20),
+                Image.network('<immagine>'),
+                const SizedBox(height: 20),
+                Text(data.weather),
+                Text('${data.temp}')
+              ],
+              error: (error, stackTrace) {
+                print(error);
+                print(stackTrace);
+                return [
+                  const Icon(Icons.sentiment_very_dissatisfied),
+                  const Text('Qualcosa è andato storto'),
+                ];
+              },
+              loading: () => [
+                const CircularProgressIndicator(),
+                const Text('Loading...'),
+              ],
+            )
           ],
         ),
       ),
