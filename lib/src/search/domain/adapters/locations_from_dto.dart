@@ -1,8 +1,8 @@
-import '../../data/dto/locations_dto.dart';
+import '../../data/dto/search_locations_dto.dart';
 import '../entities/location.dart';
 import '../entities/locations.dart';
 
-extension LocationsFromDto on LocationsDto {
+extension LocationsFromDto on SearchLocationsDto {
   Locations toDomain() {
     return Locations(
       places: [
