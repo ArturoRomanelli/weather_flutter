@@ -3,7 +3,7 @@ import '../entities/current_weather.dart';
 
 extension CurrentWeatherFromDto on CurrentWeatherDto {
   CurrentWeather toDomain() => CurrentWeather(
-        temp: current.tempC,
+        temp: current.tempC.toInt(),
         weather: current.condition.text,
         updatedAt: current.lastUpdated,
       );
