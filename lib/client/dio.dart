@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../logs/http_logger.dart';
 
 part 'dio.g.dart';
 
@@ -11,6 +14,12 @@ Dio httpClient(HttpClientRef ref) {
     receiveTimeout: 12.seconds,
     queryParameters: {'key': 'your_key'},
   );
+  final httpLogger = ref.watch(httpLoggerProvider);
+  final loggerInterceptor = PrettyDioLogger(logPrint: httpLogger.info);
 
-  return Dio(options);
+  final dio = Dio(options);
+  if (kDebugMode) dio.interceptors.add(loggerInterceptor);
+
+  ref.keepAlive(); // TODO spiegare
+  return dio;
 }
