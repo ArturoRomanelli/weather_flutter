@@ -4,6 +4,9 @@ class CurrentWeather {
     required this.weather,
     required this.updatedAt,
     required this.image,
+    this.perceivedtemp,
+    this.humidity,
+    this.wind,
   });
 
   /// our current temperature
@@ -17,4 +20,13 @@ class CurrentWeather {
 
   /// a string containing the image url
   final String image;
+
+  /// a number for the perceived temperature
+  final double? perceivedtemp;
+
+  /// a number for the humidity percentage
+  final double? humidity;
+
+  /// a number for the wind in km/h
+  final double? wind;
 }
