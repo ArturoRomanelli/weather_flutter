@@ -1,32 +1,29 @@
-class CurrentWeather {
-  const CurrentWeather({
-    required this.temp,
-    required this.weather,
-    required this.updatedAt,
-    required this.image,
-    this.perceivedtemp,
-    this.humidity,
-    this.wind,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  /// our current temperature
-  final int temp;
+part 'current_weather.freezed.dart';
 
-  /// a human-readable text about the current weather
-  final String weather;
+@freezed
+class CurrentWeather with _$CurrentWeather {
+  const factory CurrentWeather({
+    /// our current temperature
+    required int temp,
 
-  /// latest update of the weather condition
-  final DateTime updatedAt;
+    /// a human-readable text about the current weather
+    required String weather,
 
-  /// a string containing the image url
-  final String image;
+    /// latest update of the weather condition
+    required DateTime updatedAt,
 
-  /// a number for the perceived temperature
-  final double? perceivedtemp;
+    /// a string containing the image url
+    required String image,
 
-  /// a number for the humidity percentage
-  final double? humidity;
+    /// a number for the perceived temperature
+    required double? perceivedtemp,
 
-  /// a number for the wind in km/h
-  final double? wind;
+    /// a number for the humidity percentage
+    required double? humidity,
+
+    /// a number for the wind in km/h
+    required double? wind,
+  }) = _CurrentWeather;
 }
