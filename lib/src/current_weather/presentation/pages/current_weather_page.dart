@@ -36,11 +36,11 @@ class CurrentWeatherPage extends HookConsumerWidget {
                     ),
             ),
           ),
-          Center(
+          const SizedBox(height: 40),
+          Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 40),
                 ...currentWeather.when(
                   data: (data) => [
                     DecoratedBox(
