@@ -16,7 +16,10 @@ Dio httpClient(HttpClientRef ref) {
     queryParameters: {'key': 'your_key'},
   );
   final httpLogger = ref.watch(httpLoggerProvider);
-  final loggerInterceptor = PrettyDioLogger(logPrint: httpLogger.info);
+  final loggerInterceptor = PrettyDioLogger(
+    logPrint: httpLogger.info,
+    responseBody: false,
+  );
 
   final dio = Dio(options);
   if (kDebugMode) dio.interceptors.add(loggerInterceptor);
