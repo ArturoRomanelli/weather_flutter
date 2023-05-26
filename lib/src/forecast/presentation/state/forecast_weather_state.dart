@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:weather_flutter/src/current_weather/presentation/state/current_weather_location.dart';
 import 'package:weather_flutter/src/forecast/domain/entities/forecast_weather.dart';
+import 'package:weather_flutter/src/search/domain/presentation/state/current_weather_location.dart';
 
 import '../../domain/services/forecast_weather_service.dart';
 

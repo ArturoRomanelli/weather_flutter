@@ -11,8 +11,8 @@ extension CurrentWeatherFromDto on CurrentWeatherDto {
       weather: current.condition.text,
       updatedAt: current.lastUpdated,
       image: imageUrl,
-      wind: current.windkph,
-      perceivedtemp: current.feelslikec,
+      wind: current.windKph,
+      perceivedtemp: current.feelslikeC,
       humidity: current.humidity,
     );
   }

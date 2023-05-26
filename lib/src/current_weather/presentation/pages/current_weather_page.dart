@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_flutter/src/current_weather/presentation/state/current_weather_location.dart';
 
 import '../../../forecast/presentation/state/forecast_weather_state.dart';
+import '../../../search/domain/presentation/state/current_weather_location.dart';
 import '../state/current_weather_state.dart';
 
 class CurrentWeatherPage extends HookConsumerWidget {
@@ -172,14 +172,10 @@ class CurrentWeatherPage extends HookConsumerWidget {
                       ),
                     ),
                   ],
-                  error: (error, stackTrace) {
-                    print(error);
-                    print(stackTrace);
-                    return [
-                      const Icon(Icons.sentiment_very_dissatisfied),
-                      const Text('Qualcosa è andato storto'),
-                    ];
-                  },
+                  error: (error, stackTrace) => [
+                    const Icon(Icons.sentiment_very_dissatisfied),
+                    const Text('Qualcosa è andato storto'),
+                  ],
                   loading: () => [
                     const CircularProgressIndicator(),
                     const Text('Loading...'),

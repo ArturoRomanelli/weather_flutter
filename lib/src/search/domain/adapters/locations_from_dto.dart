@@ -1,5 +1,5 @@
 import '../../data/dto/search_locations_dto.dart';
-import '../entities/location.dart';
+import '../entities/current_location.dart';
 import '../entities/locations.dart';
 
 extension LocationsFromDto on SearchLocationsDto {
@@ -7,8 +7,10 @@ extension LocationsFromDto on SearchLocationsDto {
     return Locations(
       places: [
         ...locations.map(
-          (dto) => Location(
-            name: dto.name,
+          (dto) => CurrentLocation(
+            cityName: dto.name,
+            lat: dto.lat,
+            long: dto.lon,
           ),
         )
       ],

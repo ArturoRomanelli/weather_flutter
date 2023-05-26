@@ -1,5 +1,9 @@
 class CurrentLocation {
-  const CurrentLocation({required this.cityName, this.lat, this.long});
+  const CurrentLocation({
+    required this.cityName,
+    this.lat,
+    this.long,
+  });
 
   /// Latitude of this place
   final double? lat;
