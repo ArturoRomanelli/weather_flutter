@@ -1,17 +1,12 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class CurrentLocation {
+  const CurrentLocation({required this.cityName, this.lat, this.long});
 
-part 'current_location.freezed.dart';
+  /// Latitude of this place
+  final double? lat;
 
-@freezed
-class CurrentLocation with _$CurrentLocation {
-  const factory CurrentLocation({
-    /// Latitude of this place
-    required double lat,
+  /// Longitude of this place
+  final double? long;
 
-    /// Longitude of this place
-    required double long,
-
-    /// City name
-    required String cityName,
-  }) = _CurrentLocation;
+  /// City name
+  final String cityName;
 }
