@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,10 +37,8 @@ class CurrentWeatherPage extends HookConsumerWidget {
                     ),
             ),
           ),
-          const SizedBox(height: 40),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          Flexible(
+            child: ListView(
               children: [
                 ...homeLoadingResult.when(
                   data: (data) {
@@ -54,129 +53,76 @@ class CurrentWeatherPage extends HookConsumerWidget {
                       DecoratedBox(
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(4),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(2),
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           child: Text(
+                            // TODO spiegare
                             DateFormat.yMMMd().format(DateTime.now()),
                             style: const TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
                       const SizedBox(height: 20),
-                      Text(currentWeather.weather),
+                      Center(child: Text(currentWeather.weather)),
                       const SizedBox(height: 20),
-                      Text(
-                        '${currentWeather.temp}°C',
-                        style: const TextStyle(fontSize: 75),
-                      ),
-                      Image.network(currentWeather.image),
-                      const SizedBox(height: 20),
-                      const Text('Il meteo di oggi!'),
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        height: 80,
-                        width: 270,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 90,
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        Icons.air,
-                                        size: 50,
-                                        color: Colors.white,
-                                      ),
-                                      Text(
-                                        ' km/h',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Vento',
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      Spacer(),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 90,
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      const Icon(
-                                        Icons.water_drop_outlined,
-                                        size: 50,
-                                        color: Colors.white,
-                                      ),
-                                      Text(
-                                        '${currentWeather.humidity} %',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      const Text(
-                                        'Umidità',
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 90,
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      const Icon(
-                                        Icons.thermostat,
-                                        size: 50,
-                                        color: Colors.white,
-                                      ),
-                                      Text(
-                                        '${currentWeather.perceivedtemp} °C',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      const Text(
-                                        'Temp. percepita',
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                      Center(
+                        child: Text(
+                          '${currentWeather.temp}°C',
+                          style: const TextStyle(fontSize: 75),
                         ),
                       ),
-                      SizedBox(
+                      Image.network(
+                        currentWeather.image,
                         height: 80,
-                        child: ListView(
+                        fit: BoxFit.fitHeight,
+                      ),
+                      const SizedBox(height: 20),
+                      const Center(child: Text('Il meteo di oggi!')),
+                      const SizedBox(height: 20),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        margin: const EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: _WeatherIcon(
+                                icon: Icons.air,
+                                title: '${currentWeather.wind} km/h',
+                                subtitle: 'Vento',
+                              ),
+                            ),
+                            Expanded(
+                              child: _WeatherIcon(
+                                icon: Icons.water_drop_outlined,
+                                title: '${currentWeather.humidity} %',
+                                subtitle: 'Umidità',
+                              ),
+                            ),
+                            Expanded(
+                              child: _WeatherIcon(
+                                icon: Icons.thermostat,
+                                title: '${currentWeather.perceivedtemp} °C',
+                                subtitle: 'Temp. percepita',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 16),
+                        child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              for (final element in forecastWeather.previsions) Text('$element')
+                            ],
+                          ),
                         ),
                       ),
                     ];
@@ -186,14 +132,66 @@ class CurrentWeatherPage extends HookConsumerWidget {
                     const Text('Qualcosa è andato storto'),
                   ],
                   loading: () => [
-                    const CircularProgressIndicator(),
-                    const Text('Loading...'),
+                    const Center(child: CircularProgressIndicator()),
+                    const SizedBox(height: 20),
+                    const Center(child: Text('Loading...')),
                   ],
                 )
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _WeatherIcon extends StatelessWidget {
+  const _WeatherIcon({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+  });
+
+  final IconData icon;
+  final String title;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    final sizeFactor = MediaQuery.of(context).textScaleFactor;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 48 / sizeFactor,
+              color: Colors.white,
+            ),
+            AutoSizeText(
+              title,
+              maxLines: 1,
+              style: textTheme.labelLarge?.copyWith(
+                color: Colors.white,
+                fontSize: textTheme.labelLarge?.fontSize ?? 0 / sizeFactor,
+              ),
+            ),
+            AutoSizeText(
+              subtitle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: textTheme.labelSmall?.copyWith(
+                color: Colors.white,
+                fontSize: 10 / sizeFactor,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
