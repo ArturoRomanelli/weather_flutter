@@ -1,7 +1,12 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'current_location.dart';
 
-class Locations {
-  Locations({required this.places});
+part 'locations.freezed.dart';
 
-  final List<CurrentLocation> places;
+@freezed
+class Locations with _$Locations {
+  const factory Locations({
+    required List<CurrentLocation> places,
+  }) = _Locations;
 }
