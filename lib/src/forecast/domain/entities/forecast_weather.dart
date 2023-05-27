@@ -1,14 +1,16 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'forecast_day.dart';
 
-class ForecastWeather {
-  const ForecastWeather({
-    required this.updatedAt,
-    required this.previsions,
-  });
+part 'forecast_weather.freezed.dart';
 
-  /// latest update of the weather conditions
-  final DateTime updatedAt;
+@freezed
+class ForecastWeather with _$ForecastWeather {
+  const factory ForecastWeather({
+    /// latest update of the weather conditions
+    required DateTime updatedAt,
 
-  /// list of forecasts of the next days
-  final List<ForecastDay> previsions;
+    /// list of forecasts of the next days
+    required List<ForecastDay> previsions,
+  }) = _ForecastWeather;
 }

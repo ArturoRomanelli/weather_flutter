@@ -1,11 +1,12 @@
-class ForecastDay {
-  const ForecastDay({
-    required this.temp,
-    required this.weather,
-    required this.date,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final double temp;
-  final String weather;
-  final DateTime date;
+part 'forecast_day.freezed.dart';
+
+@freezed
+class ForecastDay with _$ForecastDay {
+  const factory ForecastDay({
+    required double temp,
+    required String weather,
+    required DateTime date,
+  }) = _ForecastDay;
 }
