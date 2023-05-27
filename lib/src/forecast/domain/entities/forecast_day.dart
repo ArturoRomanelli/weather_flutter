@@ -8,5 +8,6 @@ class ForecastDay with _$ForecastDay {
     required double temp,
     required String weather,
     required DateTime date,
+    required String image,
   }) = _ForecastDay;
 }
