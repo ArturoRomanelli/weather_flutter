@@ -12,6 +12,7 @@ extension ForecastWeatherFromDto on ForecastWeatherDto {
             date: dto.date,
             temp: dto.day.avgtempC,
             weather: dto.day.condition.text,
+            image: 'https://${dto.day.condition.icon.substring(2)}',
           ),
         )
       ],
