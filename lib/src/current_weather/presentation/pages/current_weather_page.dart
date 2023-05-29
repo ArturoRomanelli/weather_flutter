@@ -193,7 +193,12 @@ class _LocationResultsWidget extends HookConsumerWidget {
           ],
         ), // usa lista con ListTile
         error: (error, stackTrace) => const Center(child: Text("C'è stato un errore")),
-        loading: () => const Text('Caricamento...'),
+        loading: () => const Column(
+          children: [
+            CircularProgressIndicator(),
+            Text('Caricamento...'),
+          ],
+        ),
       ),
       actions: <Widget>[
         TextButton(
