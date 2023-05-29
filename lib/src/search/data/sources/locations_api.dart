@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:weather_flutter/client/dio.dart';
-
-import '../../../../core/json.dart';
+import 'package:weather_flutter/core/json.dart';
 
 part 'locations_api.g.dart';
 
@@ -17,14 +16,14 @@ class LocationsApi {
   const LocationsApi(this.dio);
   final Dio dio;
 
-  Future<JSON> locations({required String q}) async {
-    final result = await dio.get<JSON>(
+  Future<Iterable<JSON>> locations({required String q}) async {
+    final result = await dio.get<List<dynamic>>(
       '/search.json',
       queryParameters: {'q': q},
     );
 
     final data = result.data!;
 
-    return data;
+    return data.map((e) => e as JSON);
   }
 }
