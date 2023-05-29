@@ -176,7 +176,7 @@ class _LocationResultsWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locations = ref.watch(searchLocationsProvider(query));
-    final selectedLocation = useState('...');
+    final selectedLocation = useState<String>('');
 
     return AlertDialog(
       title: const Text('Stavi cercando...'),
@@ -187,7 +187,7 @@ class _LocationResultsWidget extends HookConsumerWidget {
               (location) => ListTile(
                 title: Text(location.cityName),
                 subtitle: Text(location.country),
-                // onTap,
+                onTap: () => selectedLocation.value = location.cityName,
               ),
             ),
           ],
@@ -207,7 +207,7 @@ class _LocationResultsWidget extends HookConsumerWidget {
           style: TextButton.styleFrom(
             textStyle: Theme.of(context).textTheme.labelLarge,
           ),
-          onPressed: locations.isLoading ? null : () => context.pop('lo stato che sto cambiando'),
+          onPressed: locations.isLoading ? null : () => context.pop(selectedLocation),
           child: const Text('Seleziona'),
         ),
       ],
