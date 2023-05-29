@@ -5,14 +5,17 @@ import '../../domain/entities/current_location.dart';
 part 'current_weather_location.g.dart';
 
 @riverpod
-CurrentLocation currentLocation(CurrentLocationRef ref) {
-  // final service = ref.watch(locationsServiceProvider);
+class CurrentLocationController extends _$CurrentLocationController {
+  @override
+  CurrentLocation build() {
+    // final service = ref.watch(locationsServiceProvider);
 
-  // final CurrentLocation =
-  // Mock
-  return const CurrentLocation(
-    cityName: 'Udine',
-    lat: 1,
-    long: 2,
-  );
+    // final CurrentLocation =
+    // Mock
+    return const CurrentLocation(
+      cityName: 'Udine',
+      lat: 1,
+      long: 2,
+    );
+  }
 }

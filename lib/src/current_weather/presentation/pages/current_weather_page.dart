@@ -3,12 +3,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_flutter/src/search/domain/presentation/state/locations_search.dart';
 
 import '../../../forecast/presentation/state/forecast_weather_state.dart';
-import '../../../search/domain/presentation/state/current_weather_location.dart';
+import '../../../search/presentation/state/locations_search.dart';
 import '../state/current_weather_state.dart';
 import '../state/home_loading_state.dart';
 
@@ -18,7 +18,6 @@ class CurrentWeatherPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final homeLoadingResult = ref.watch(homeLoadingProvider);
-    final locations = ref.watch(SearchLocationsProvider)
     final currentLocation = ref.watch(currentLocationProvider);
 
     final controller = useTextEditingController(text: '');
@@ -28,20 +27,22 @@ class CurrentWeatherPage extends HookConsumerWidget {
       appBar: AppBar(title: Center(child: Text(currentLocation.cityName))),
       body: Column(
         children: [
-          TextField(
-            controller: controller,
-            decoration: InputDecoration(
-              label: const Text('Cerca la tua città...'),
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: (search) => _dialogBuilder(context, search),
+          ListTile(
+            leading: isSearchEmpty
+                ? null
+                : IconButton(
+                    onPressed: controller.clear,
+                    icon: const Icon(Icons.close),
+                  ),
+            trailing: IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () => _dialogBuilder(context, controller.text),
+            ),
+            title: TextField(
+              controller: controller,
+              decoration: const InputDecoration(
+                label: Text('Cerca la tua città...'),
               ),
-              prefixIcon: isSearchEmpty
-                  ? null
-                  : IconButton(
-                      onPressed: controller.clear,
-                      icon: const Icon(Icons.close),
-                    ),
             ),
           ),
           Flexible(
@@ -160,29 +161,47 @@ class CurrentWeatherPage extends HookConsumerWidget {
   }
 }
 
-Future<void> _dialogBuilder(BuildContext context, search) async {
-  
-  final locations = await 
+Future<void> _dialogBuilder(BuildContext context, String search) {
   return showDialog<void>(
     context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Stavi cercando...'),
-        content:  const Text(),
-        actions: <Widget>[
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-            ),
-            child: const Text('Enable'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
+    builder: (_) => _LocationResultsWidget(search),
   );
+}
+
+class _LocationResultsWidget extends HookConsumerWidget {
+  const _LocationResultsWidget(this.query);
+  final String query;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locations = ref.watch(searchLocationsProvider(query));
+    final selectedLocation = useState('...');
+
+    return AlertDialog(
+      title: const Text('Stavi cercando...'),
+      content: locations.when(
+        data: (data) => const Text(''), // usa lista con ListTile
+        error: (error, stackTrace) => const Center(child: Text("C'è stato un errore")),
+        loading: () => const Text('Caricamento...'),
+      ),
+      actions: <Widget>[
+        TextButton(
+          style: TextButton.styleFrom(
+            textStyle: Theme.of(context).textTheme.labelLarge,
+          ),
+          onPressed: context.pop,
+          child: const Text('Annulla'),
+        ),
+        TextButton(
+          style: TextButton.styleFrom(
+            textStyle: Theme.of(context).textTheme.labelLarge,
+          ),
+          onPressed: locations.isLoading ? null : () => context.pop('lo stato che sto cambiando'),
+          child: const Text('Seleziona'),
+        ),
+      ],
+    );
+  }
 }
 
 class ForecastBox extends StatelessWidget {
