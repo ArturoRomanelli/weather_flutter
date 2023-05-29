@@ -1,8 +1,11 @@
+// ignore_for_file: use_colored_box
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_flutter/src/search/domain/presentation/state/locations_search.dart';
 
 import '../../../forecast/presentation/state/forecast_weather_state.dart';
 import '../../../search/domain/presentation/state/current_weather_location.dart';
@@ -15,6 +18,7 @@ class CurrentWeatherPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final homeLoadingResult = ref.watch(homeLoadingProvider);
+    final locations = ref.watch(SearchLocationsProvider)
     final currentLocation = ref.watch(currentLocationProvider);
 
     final controller = useTextEditingController(text: '');
@@ -28,8 +32,11 @@ class CurrentWeatherPage extends HookConsumerWidget {
             controller: controller,
             decoration: InputDecoration(
               label: const Text('Cerca la tua città...'),
-              prefixIcon: const Icon(Icons.search),
-              suffixIcon: isSearchEmpty
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: (search) => _dialogBuilder(context, search),
+              ),
+              prefixIcon: isSearchEmpty
                   ? null
                   : IconButton(
                       onPressed: controller.clear,
@@ -57,10 +64,12 @@ class CurrentWeatherPage extends HookConsumerWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          child: Text(
-                            // TODO spiegare
-                            DateFormat.yMMMd().format(DateTime.now()),
-                            style: const TextStyle(color: Colors.white),
+                          child: Center(
+                            child: Text(
+                              // TODO spiegare
+                              DateFormat.yMMMd().format(DateTime.now()),
+                              style: const TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
@@ -120,7 +129,12 @@ class CurrentWeatherPage extends HookConsumerWidget {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
-                              for (final element in forecastWeather.previsions) Text('$element')
+                              for (final element in forecastWeather.previsions)
+                                ForecastBox(
+                                  temp: element.temp,
+                                  image: element.image,
+                                  date: element.date,
+                                )
                             ],
                           ),
                         ),
@@ -141,6 +155,88 @@ class CurrentWeatherPage extends HookConsumerWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+Future<void> _dialogBuilder(BuildContext context, search) async {
+  
+  final locations = await 
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Stavi cercando...'),
+        content:  const Text(),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Enable'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+class ForecastBox extends StatelessWidget {
+  const ForecastBox({
+    super.key,
+    required this.temp,
+    required this.image,
+    required this.date,
+  });
+
+  final double temp;
+  final String image;
+  final DateTime date;
+
+  @override
+  Widget build(BuildContext context) {
+    final sizeFactor = MediaQuery.of(context).textScaleFactor;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 2),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        color: Theme.of(context).primaryColor,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 4,
+          vertical: 8,
+        ),
+        child: Column(
+          children: [
+            AutoSizeText(
+              '$temp °C',
+              maxLines: 1,
+              style: textTheme.labelLarge?.copyWith(
+                color: Colors.white,
+                fontSize: Theme.of(context).textTheme.labelLarge?.fontSize ?? 0 / sizeFactor,
+              ),
+            ),
+            Image.network(
+              image,
+            ),
+            AutoSizeText(
+              DateFormat.MMMd().format(date),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: textTheme.labelSmall?.copyWith(
+                color: Colors.white,
+                fontSize: 10 / sizeFactor,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

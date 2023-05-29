@@ -6,6 +6,9 @@ part 'current_weather_location.g.dart';
 
 @riverpod
 CurrentLocation currentLocation(CurrentLocationRef ref) {
+  // final service = ref.watch(locationsServiceProvider);
+
+  // final CurrentLocation =
   // Mock
   return const CurrentLocation(
     cityName: 'Udine',
