@@ -11,7 +11,7 @@ part 'current_weather_state.g.dart';
 @riverpod
 FutureOr<CurrentWeather> currentWeather(CurrentWeatherRef ref) async {
   final service = ref.watch(currentWeatherServiceProvider);
-  final location = ref.watch(currentLocationProvider);
+  final location = ref.watch(currentLocationControllerProvider);
   final currentWeather = await service.getCurrentWeather(location);
 
   ref.cacheFor(10.minutes);

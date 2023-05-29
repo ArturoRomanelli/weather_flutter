@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../forecast/presentation/state/forecast_weather_state.dart';
+import '../../../search/presentation/state/current_weather_location.dart';
 import '../../../search/presentation/state/locations_search.dart';
 import '../state/current_weather_state.dart';
 import '../state/home_loading_state.dart';
@@ -18,7 +19,7 @@ class CurrentWeatherPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final homeLoadingResult = ref.watch(homeLoadingProvider);
-    final currentLocation = ref.watch(currentLocationProvider);
+    final currentLocation = ref.watch(currentLocationControllerProvider);
 
     final controller = useTextEditingController(text: '');
     final isSearchEmpty = useListenableSelector(controller, () => controller.text.isEmpty);
@@ -180,7 +181,17 @@ class _LocationResultsWidget extends HookConsumerWidget {
     return AlertDialog(
       title: const Text('Stavi cercando...'),
       content: locations.when(
-        data: (data) => const Text(''), // usa lista con ListTile
+        data: (data) => Column(
+          children: [
+            ...data.places.map(
+              (location) => ListTile(
+                title: Text(location.cityName),
+                subtitle: Text(location.country),
+                // onTap,
+              ),
+            ),
+          ],
+        ), // usa lista con ListTile
         error: (error, stackTrace) => const Center(child: Text("C'è stato un errore")),
         loading: () => const Text('Caricamento...'),
       ),
