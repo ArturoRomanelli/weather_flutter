@@ -6,12 +6,15 @@ part 'current_location.freezed.dart';
 class CurrentLocation with _$CurrentLocation {
   const factory CurrentLocation({
     /// Latitude of this place
-    required double? lat,
+    double? lat,
 
     /// Longitude of this place
-    required double? long,
+    double? long,
 
     /// City name
     required String cityName,
+
+    /// Country
+    required String country,
   }) = _CurrentLocation;
 }

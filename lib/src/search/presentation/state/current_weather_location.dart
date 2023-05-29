@@ -16,6 +16,7 @@ class CurrentLocationController extends _$CurrentLocationController {
       cityName: 'Udine',
       lat: 1,
       long: 2,
+      country: 'Italy',
     );
   }
 }

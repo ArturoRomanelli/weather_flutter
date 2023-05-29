@@ -11,6 +11,7 @@ extension LocationsFromDto on SearchLocationsDto {
             cityName: dto.name,
             lat: dto.lat,
             long: dto.lon,
+            country: dto.country,
           ),
         )
       ],
