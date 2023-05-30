@@ -22,42 +22,37 @@ class LocationSearchBar extends HookConsumerWidget {
       );
       // ignore: use_build_context_synchronously
       if (!context.mounted) return;
-      // TODO use focusNode to unfocus
+      focusNode.unfocus();
       if (result == null) return;
 
       ref.read(currentLocationControllerProvider.notifier).state = result;
       controller.clear();
     }
 
-    // Use a SearchBar instead: the requirement is to have the exact same behavior
-    // it is not mandatory to follow the current UI closely
-    return ListTile(
-      trailing: Ink(
-        decoration: const ShapeDecoration(
-          color: Colors.blue,
-          shape: CircleBorder(),
-        ),
-        child: IconButton(
-          icon: const Icon(
-            Icons.search,
-            color: Colors.white,
+    return SearchBar(
+      trailing: [
+        Ink(
+          decoration: const ShapeDecoration(
+            color: Colors.blue,
+            shape: CircleBorder(),
           ),
-          onPressed: dialogBuilder,
+          child: IconButton(
+            icon: const Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            onPressed: dialogBuilder,
+          ),
         ),
-      ),
-      title: TextField(
-        controller: controller,
-        onSubmitted: (_) => dialogBuilder(),
-        decoration: InputDecoration(
-          prefixIcon: isSearchEmpty
-              ? null
-              : IconButton(
-                  onPressed: controller.clear,
-                  icon: const Icon(Icons.close),
-                ),
-          label: const Text('Cerca la tua città...'),
-        ),
-      ),
+      ],
+      controller: controller,
+      leading: isSearchEmpty
+          ? null
+          : IconButton(
+              onPressed: controller.clear,
+              icon: const Icon(Icons.close),
+            ),
+      hintText: 'Cerca la tua città...',
     );
   }
 }
