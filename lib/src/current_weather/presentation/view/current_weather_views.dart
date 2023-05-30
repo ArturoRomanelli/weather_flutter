@@ -7,11 +7,20 @@ extension HumidityView on CurrentWeather {
     final integerHumidity = humidity.round();
     return '$integerHumidity %';
   }
-
-  // TODO create more views as needed
 }
 
-void suggestion() {
-  // TODO read this https://api.flutter.dev/flutter/intl/NumberFormat-class.html
-  final formatter = NumberFormat();
+extension WindView on CurrentWeather {
+  String get formattedWind {
+    final twoDecimalFormat = NumberFormat('###.##');
+    final formattedWind = twoDecimalFormat.format(wind);
+    return '$formattedWind km/h';
+  }
+}
+
+extension TemperatureView on CurrentWeather {
+  String get formattedTemp {
+    final twoDecimalFormat = NumberFormat('###.##');
+    final formattedTemp = twoDecimalFormat.format(temp);
+    return '$formattedTemp °C';
+  }
 }

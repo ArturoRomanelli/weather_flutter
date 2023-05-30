@@ -84,8 +84,7 @@ class CurrentWeatherPage extends HookConsumerWidget {
                             Expanded(
                               child: _WeatherIcon(
                                 icon: Icons.air,
-                                // TODO create view (let it have two digits)
-                                title: '${currentWeather.wind} km/h',
+                                title: currentWeather.formattedWind,
                                 subtitle: 'Vento',
                               ),
                             ),
@@ -99,8 +98,7 @@ class CurrentWeatherPage extends HookConsumerWidget {
                             Expanded(
                               child: _WeatherIcon(
                                 icon: Icons.thermostat,
-                                // TODO create view (let it have two digits)
-                                title: '${currentWeather.perceivedtemp} °C',
+                                title: currentWeather.formattedTemp,
                                 subtitle: 'Temp. percepita',
                               ),
                             ),
