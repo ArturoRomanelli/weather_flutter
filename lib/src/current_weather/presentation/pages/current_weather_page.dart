@@ -44,7 +44,7 @@ class CurrentWeatherPage extends HookConsumerWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           child: Center(
                             child: Text(
-                              DateTime.now().formatted,
+                              DateTime.now().formattedCurrentDate,
                               style: const TextStyle(color: Colors.white),
                             ),
                           ),

@@ -19,8 +19,8 @@ extension WindView on CurrentWeather {
 
 extension TemperatureView on CurrentWeather {
   String get formattedTemp {
-    final twoDecimalFormat = NumberFormat('###.##');
-    final formattedTemp = twoDecimalFormat.format(temp);
+    final oneDecimalFormat = NumberFormat('##0.#');
+    final formattedTemp = oneDecimalFormat.format(temp);
     return '$formattedTemp °C';
   }
 }
