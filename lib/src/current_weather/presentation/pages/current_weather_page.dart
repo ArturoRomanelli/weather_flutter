@@ -21,7 +21,10 @@ class CurrentWeatherPage extends HookConsumerWidget {
     final currentLocation = ref.watch(currentLocationControllerProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text(currentLocation.cityName))),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        title: Center(child: Text(currentLocation.cityName)),
+      ),
       body: Column(
         children: [
           const LocationSearchBar(),

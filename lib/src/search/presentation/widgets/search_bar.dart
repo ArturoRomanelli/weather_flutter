@@ -32,13 +32,14 @@ class LocationSearchBar extends HookConsumerWidget {
     return SearchBar(
       focusNode: focusNode,
       controller: controller,
+      backgroundColor: MaterialStateProperty.all(Theme.of(context).scaffoldBackgroundColor),
       trailing: [
         Padding(
           padding: const EdgeInsets.all(8),
           child: Ink(
-            decoration: const ShapeDecoration(
-              color: Colors.blue,
-              shape: CircleBorder(),
+            decoration: ShapeDecoration(
+              color: Theme.of(context).primaryColor,
+              shape: const CircleBorder(),
             ),
             child: IconButton(
               icon: const Icon(
