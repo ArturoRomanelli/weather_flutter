@@ -9,4 +9,6 @@
 	<key>com.apple.security.network.server</key>
 	<true/>
 </dict>
+<key>com.apple.security.personal-information.location</key>
+<true/>
 </plist>
