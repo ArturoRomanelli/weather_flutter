@@ -29,6 +29,7 @@ dependencies:
   slang: ^3.17.0
   slang_flutter: ^3.17.0
   geolocator: ^9.0.2
+  google_fonts: ^4.0.5
 
 dev_dependencies:
   flutter_test:
