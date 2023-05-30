@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:weather_flutter/src/forecast/presentation/view/forecast_views.dart';
 
 import '../state/forecast_weather_state.dart';
 import 'forecast_box.dart';
@@ -29,8 +30,7 @@ class ForecastWidget extends ConsumerWidget {
               children: [
                 for (final element in forecastWeather.previsions)
                   ForecastBox(
-                    // use a view such that temp becomes a well-formatted string (1 digit)
-                    temp: element.temp,
+                    title: element.formattedTemperature,
                     image: element.image,
                     date: element.date,
                   )

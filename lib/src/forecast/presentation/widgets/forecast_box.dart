@@ -5,13 +5,13 @@ import 'package:intl/intl.dart';
 class ForecastBox extends StatelessWidget {
   const ForecastBox({
     super.key,
-    required this.temp,
+    required this.title,
     required this.image,
     required this.date,
   });
 
   // TODO make this a String and name it "title"
-  final double temp;
+  final String title;
   final String image;
   final DateTime date;
 
@@ -34,7 +34,7 @@ class ForecastBox extends StatelessWidget {
         child: Column(
           children: [
             AutoSizeText(
-              '$temp °C',
+              title,
               maxLines: 1,
               style: textTheme.labelLarge?.copyWith(
                 color: Colors.white,
