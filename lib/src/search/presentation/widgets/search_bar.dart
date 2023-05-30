@@ -31,17 +31,20 @@ class LocationSearchBar extends HookConsumerWidget {
 
     return SearchBar(
       trailing: [
-        Ink(
-          decoration: const ShapeDecoration(
-            color: Colors.blue,
-            shape: CircleBorder(),
-          ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.search,
-              color: Colors.white,
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: Ink(
+            decoration: const ShapeDecoration(
+              color: Colors.blue,
+              shape: CircleBorder(),
             ),
-            onPressed: dialogBuilder,
+            child: IconButton(
+              icon: const Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              onPressed: dialogBuilder,
+            ),
           ),
         ),
       ],
