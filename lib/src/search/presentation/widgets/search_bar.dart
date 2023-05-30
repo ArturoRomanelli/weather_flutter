@@ -30,6 +30,8 @@ class LocationSearchBar extends HookConsumerWidget {
     }
 
     return SearchBar(
+      focusNode: focusNode,
+      controller: controller,
       trailing: [
         Padding(
           padding: const EdgeInsets.all(8),
@@ -48,7 +50,6 @@ class LocationSearchBar extends HookConsumerWidget {
           ),
         ),
       ],
-      controller: controller,
       leading: isSearchEmpty
           ? null
           : IconButton(

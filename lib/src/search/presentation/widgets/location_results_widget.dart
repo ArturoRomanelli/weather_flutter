@@ -49,7 +49,9 @@ class LocationResultsWidget extends HookConsumerWidget {
           style: TextButton.styleFrom(
             textStyle: Theme.of(context).textTheme.labelLarge,
           ),
-          onPressed: locations.isLoading ? null : () => context.pop(selectedLocation.value),
+          onPressed: locations.isLoading || selectedLocation.value == null
+              ? null
+              : () => context.pop(selectedLocation.value),
           child: const Text('Seleziona'),
         ),
       ],
