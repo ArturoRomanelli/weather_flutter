@@ -18,7 +18,9 @@ class LocationsService {
 
   Future<Locations> getLocations(String search) async {
     final result = await repository.getLocations(search);
+    final places = result.map((e) => e.toDomain());
+    final locations = places as Locations;
 
-    return result.toDomain();
+    return locations;
   }
 }

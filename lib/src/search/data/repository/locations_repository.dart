@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../dto/search_locations_dto.dart';
+import '../dto/search_location_dto.dart';
 import '../sources/locations_api.dart';
 
 part 'locations_repository.g.dart';
@@ -16,10 +16,10 @@ class LocationsRepository {
   final LocationsApi api;
 
   // TODO change return type
-  Future<SearchLocationsDto> getLocations(String search) async {
+  Future<Iterable<SearchLocationDto>> getLocations(String search) async {
     final result = await api.locations(q: search);
+    final locations = result.map(SearchLocationDto.fromJson);
 
-    // here we get a Iterable<Json>, thus we should return a List<SearchLocationsDto>
-    return SearchLocationsDto.fromJson(result);
+    return locations;
   }
 }

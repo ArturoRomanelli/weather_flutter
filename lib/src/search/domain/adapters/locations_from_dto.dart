@@ -1,20 +1,13 @@
-import '../../data/dto/search_locations_dto.dart';
+import '../../data/dto/search_location_dto.dart';
 import '../entities/current_location.dart';
-import '../entities/locations.dart';
 
-extension LocationsFromDto on SearchLocationsDto {
-  Locations toDomain() {
-    return Locations(
-      places: [
-        ...locations.map(
-          (dto) => CurrentLocation(
-            cityName: dto.name,
-            lat: dto.lat,
-            long: dto.lon,
-            country: dto.country,
-          ),
-        )
-      ],
+extension LocationsFromDto on SearchLocationDto {
+  CurrentLocation toDomain() {
+    return CurrentLocation(
+      cityName: name,
+      lat: lat,
+      long: lon,
+      country: country,
     );
   }
 }
