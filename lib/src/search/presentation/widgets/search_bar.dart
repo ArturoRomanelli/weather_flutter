@@ -33,12 +33,15 @@ class LocationSearchBar extends HookConsumerWidget {
     // it is not mandatory to follow the current UI closely
     return ListTile(
       trailing: Ink(
-        decoration: ShapeDecoration(
-          color: Colors.blue.shade100,
-          shape: const CircleBorder(),
+        decoration: const ShapeDecoration(
+          color: Colors.blue,
+          shape: CircleBorder(),
         ),
         child: IconButton(
-          icon: const Icon(Icons.search),
+          icon: const Icon(
+            Icons.search,
+            color: Colors.white,
+          ),
           onPressed: dialogBuilder,
         ),
       ),
