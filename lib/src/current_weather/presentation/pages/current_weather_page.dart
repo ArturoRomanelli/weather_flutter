@@ -35,6 +35,7 @@ class CurrentWeatherPage extends HookConsumerWidget {
                     );
 
                     return [
+                      const SizedBox(height: 10),
                       DecoratedBox(
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
