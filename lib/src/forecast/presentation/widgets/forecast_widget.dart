@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:weather_flutter/src/forecast/presentation/view/forecast_views.dart';
+import 'package:weather_flutter/src/forecast/presentation/view/forecast_weather_views.dart';
 
 import '../state/forecast_weather_state.dart';
 import 'forecast_box.dart';

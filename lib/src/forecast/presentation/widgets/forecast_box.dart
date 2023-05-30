@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:weather_flutter/src/forecast/presentation/view/forecast_date_view.dart';
 
 class ForecastBox extends StatelessWidget {
   const ForecastBox({
@@ -10,7 +10,6 @@ class ForecastBox extends StatelessWidget {
     required this.date,
   });
 
-  // TODO make this a String and name it "title"
   final String title;
   final String image;
   final DateTime date;
@@ -45,8 +44,7 @@ class ForecastBox extends StatelessWidget {
               image,
             ),
             AutoSizeText(
-              // TODO use a view
-              DateFormat.MMMd().format(date),
+              date.formattedForecastDate,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: textTheme.labelSmall?.copyWith(
