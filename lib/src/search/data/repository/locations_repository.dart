@@ -15,7 +15,6 @@ class LocationsRepository {
   const LocationsRepository(this.api);
   final LocationsApi api;
 
-  // TODO change return type
   Future<Iterable<SearchLocationDto>> getLocations(String search) async {
     final result = await api.locations(q: search);
     final locations = result.map(SearchLocationDto.fromJson);

@@ -18,12 +18,12 @@ class CurrentWeather with _$CurrentWeather {
     required String image,
 
     /// a number for the perceived temperature
-    required double? perceivedtemp,
+    required double perceivedtemp,
 
     /// a number for the humidity percentage
-    required double? humidity,
+    required double humidity,
 
     /// a number for the wind in km/h
-    required double? wind,
+    required double wind,
   }) = _CurrentWeather;
 }

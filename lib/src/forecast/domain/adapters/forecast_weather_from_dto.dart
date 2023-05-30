@@ -7,14 +7,13 @@ extension ForecastWeatherFromDto on ForecastWeatherDto {
     return ForecastWeather(
       updatedAt: current.lastUpdated,
       previsions: [
-        ...forecast.forecastday.map(
-          (dto) => ForecastDay(
+        for (final dto in forecast.forecastday)
+          ForecastDay(
             date: dto.date,
             temp: dto.day.avgtempC,
             weather: dto.day.condition.text,
             image: 'https://${dto.day.condition.icon.substring(2)}',
           ),
-        )
       ],
     );
   }

@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_public_notifier_properties
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/entities/current_location.dart';
@@ -12,5 +13,10 @@ class CurrentLocationController extends _$CurrentLocationController {
       cityName: 'Udine',
       country: 'Italy',
     );
+  }
+
+  @override
+  set state(CurrentLocation value) {
+    super.state = value;
   }
 }
