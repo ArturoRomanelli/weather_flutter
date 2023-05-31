@@ -25,9 +25,6 @@ class CurrentLocationController extends _$CurrentLocationController {
   }
 
   void updateLocation(CurrentLocation location) {
-    // TODO: leggere la documentazione di questa funziona
-    // TLDR: aggiorna lo stato interno con una funzione che accetta come input lo stato precedente
-    // update((p0) => null);
     state = AsyncValue.data(location);
   }
 }
