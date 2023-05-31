@@ -18,7 +18,7 @@ Dio httpClient(HttpClientRef ref) {
   final httpLogger = ref.watch(httpLoggerProvider);
   final loggerInterceptor = PrettyDioLogger(
     logPrint: httpLogger.info,
-    responseBody: false,
+    // responseBody: false,
   );
 
   final dio = Dio(options);

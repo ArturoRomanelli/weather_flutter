@@ -18,26 +18,28 @@ class CurrentWeatherPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final homeLoadingResult = ref.watch(homeLoadingProvider);
-    final currentLocation = ref.watch(currentLocationControllerProvider);
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: Center(child: Text(currentLocation.cityName)),
-      ),
-      body: Column(
-        children: [
-          const LocationSearchBar(),
-          Flexible(
-            child: ListView(
-              children: [
-                ...homeLoadingResult.when(
-                  data: (data) {
-                    final currentWeather = ref.watch(
-                      currentWeatherProvider.select((value) => value.requireValue),
-                    );
+    return homeLoadingResult.when(
+      data: (_) {
+        final currentLocation = ref.watch(
+          currentLocationControllerProvider.select((value) => value.requireValue),
+        );
+        final currentWeather = ref.watch(
+          currentWeatherProvider.select((value) => value.requireValue),
+        );
 
-                    return [
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            title: Center(child: Text(currentLocation.cityName)),
+          ),
+          body: Column(
+            children: [
+              const LocationSearchBar(),
+              Flexible(
+                child: ListView(
+                  children: [
+                    ...[
                       const SizedBox(height: 10),
                       DecoratedBox(
                         decoration: BoxDecoration(
@@ -110,23 +112,25 @@ class CurrentWeatherPage extends HookConsumerWidget {
                         ),
                       ),
                       const ForecastWidget(),
-                    ];
-                  },
-                  error: (error, stackTrace) => [
-                    const Icon(Icons.sentiment_very_dissatisfied),
-                    const Text('Qualcosa è andato storto'),
+                    ]
                   ],
-                  loading: () => [
-                    const Center(child: CircularProgressIndicator()),
-                    const SizedBox(height: 20),
-                    const Center(child: Text('Loading...')),
-                  ],
-                )
-              ],
-            ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
+
+      // TODO fix this with a nice scaffolding widget
+      error: (error, stackTrace) => [
+        const Icon(Icons.sentiment_very_dissatisfied),
+        const Text('Qualcosa è andato storto'),
+      ],
+      loading: () => [
+        const Center(child: CircularProgressIndicator()),
+        const SizedBox(height: 20),
+        const Center(child: Text('Loading...')),
+      ],
     );
   }
 }

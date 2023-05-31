@@ -9,7 +9,7 @@ part 'forecast_weather_state.g.dart';
 @riverpod
 FutureOr<ForecastWeather> forecastWeather(ForecastWeatherRef ref) async {
   final service = ref.watch(forecastWeatherServiceProvider);
-  final location = ref.watch(currentLocationControllerProvider);
+  final location = await ref.watch(currentLocationControllerProvider.future);
   final forecastWeather = await service.getForecastWeather(location, 7);
 
   return forecastWeather;

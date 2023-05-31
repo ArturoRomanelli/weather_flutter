@@ -1,11 +1,19 @@
-import 'dart:async';
-
 import 'package:geolocator/geolocator.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../errors/geolocation_errors.dart';
 
-class GeoLocation {
-  FutureOr<Position> getGeoPosition() async {
+part 'geolocation_service.g.dart';
+
+@riverpod
+GeoLocationService geoLocationService(GeoLocationServiceRef ref) {
+  return const GeoLocationService();
+}
+
+class GeoLocationService {
+  const GeoLocationService();
+
+  Future<Position> getGeoPosition() async {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) throw const LocationServiceDisabledException();
 

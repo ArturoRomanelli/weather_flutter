@@ -25,7 +25,7 @@ class LocationSearchBar extends HookConsumerWidget {
       focusNode.unfocus();
       if (result == null) return;
 
-      ref.read(currentLocationControllerProvider.notifier).state = result;
+      ref.read(currentLocationControllerProvider.notifier).updateLocation(result);
       controller.clear();
     }
 
