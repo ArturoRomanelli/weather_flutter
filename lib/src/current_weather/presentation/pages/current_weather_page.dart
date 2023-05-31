@@ -4,8 +4,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../current_location/presentation/state/current_weather_location.dart';
 import '../../../forecast/presentation/widgets/forecast_widget.dart';
-import '../../../search/presentation/state/current_weather_location.dart';
 import '../../../search/presentation/widgets/search_bar.dart';
 import '../state/current_weather_state.dart';
 import '../state/home_loading_state.dart';

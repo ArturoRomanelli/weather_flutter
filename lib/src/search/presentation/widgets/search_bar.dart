@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../current_location/domain/entities/current_location.dart';
-import '../state/current_weather_location.dart';
+import '../../../current_location/presentation/state/current_weather_location.dart';
 import 'location_results_widget.dart';
 
 class LocationSearchBar extends HookConsumerWidget {

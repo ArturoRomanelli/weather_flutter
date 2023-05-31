@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:weather_flutter/src/forecast/domain/entities/forecast_weather.dart';
 
-import '../../../search/presentation/state/current_weather_location.dart';
+import '../../../current_location/presentation/state/current_weather_location.dart';
 import '../../domain/services/forecast_weather_service.dart';
 
 part 'forecast_weather_state.g.dart';
