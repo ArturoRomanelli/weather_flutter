@@ -49,3 +49,6 @@ api.json
 # Dart-related settings
 *.freezed.dart
 *.g.dart
+
+# My comments on the part of the project
+*comment.md
