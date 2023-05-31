@@ -1,5 +1,5 @@
+import '../../../current_location/domain/entities/current_location.dart';
 import '../../data/dto/search_location_dto.dart';
-import '../entities/current_location.dart';
 
 extension LocationsFromDto on SearchLocationDto {
   CurrentLocation toDomain() {
