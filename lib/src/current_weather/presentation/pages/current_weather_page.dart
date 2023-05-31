@@ -120,17 +120,23 @@ class CurrentWeatherPage extends HookConsumerWidget {
           ),
         );
       },
-
-      // TODO fix this with a nice scaffolding widget
-      error: (error, stackTrace) => [
-        const Icon(Icons.sentiment_very_dissatisfied),
-        const Text('Qualcosa è andato storto'),
-      ],
-      loading: () => [
-        const Center(child: CircularProgressIndicator()),
-        const SizedBox(height: 20),
-        const Center(child: Text('Loading...')),
-      ],
+      error: (error, stackTrace) => const Scaffold(
+        body: Column(
+          children: [
+            Icon(Icons.sentiment_very_dissatisfied),
+            Text('Qualcosa è andato storto'),
+          ],
+        ),
+      ),
+      loading: () => const Scaffold(
+        body: Column(
+          children: [
+            Center(child: CircularProgressIndicator()),
+            SizedBox(height: 20),
+            Center(child: Text('Loading...')),
+          ],
+        ),
+      ),
     );
   }
 }
