@@ -33,108 +33,120 @@ class CurrentWeatherPage extends HookConsumerWidget {
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             title: Center(child: Text(currentLocation.cityName)),
           ),
-          body: Column(
-            children: [
-              const LocationSearchBar(),
-              Flexible(
-                child: ListView(
-                  children: [
-                    ...[
-                      const SizedBox(height: 10),
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          child: Center(
-                            child: Text(
-                              DateTime.now().formattedCurrentDate,
-                              style: const TextStyle(color: Colors.white),
+          body: SafeArea(
+            child: Column(
+              children: [
+                const LocationSearchBar(),
+                Flexible(
+                  child: ListView(
+                    children: [
+                      ...[
+                        const SizedBox(height: 10),
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            child: Center(
+                              child: Text(
+                                DateTime.now().formattedCurrentDate,
+                                style: const TextStyle(color: Colors.white),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      Center(
-                        child: Text(
-                          'Il meteo di oggi!',
-                          style: Theme.of(context).textTheme.titleLarge,
+                        const SizedBox(height: 20),
+                        Center(
+                          child: Text(
+                            'Il meteo di oggi!',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      Center(child: Text(currentWeather.weather)),
-                      const SizedBox(height: 20),
-                      Center(
-                        child: Text(
-                          '${currentWeather.temp}°C',
-                          style: const TextStyle(fontSize: 75),
+                        const SizedBox(height: 20),
+                        Center(child: Text(currentWeather.weather)),
+                        const SizedBox(height: 20),
+                        Center(
+                          child: Text(
+                            '${currentWeather.temp}°C',
+                            style: const TextStyle(fontSize: 75),
+                          ),
                         ),
-                      ),
-                      Image.network(
-                        currentWeather.image,
-                        height: 80,
-                        fit: BoxFit.fitHeight,
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                        margin: const EdgeInsets.symmetric(horizontal: 12),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(10),
+                        Image.network(
+                          currentWeather.image,
+                          height: 80,
+                          fit: BoxFit.fitHeight,
                         ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: _WeatherIcon(
-                                icon: Icons.air,
-                                title: currentWeather.formattedWind,
-                                subtitle: 'Vento',
+                        const SizedBox(height: 20),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                          margin: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: _WeatherIcon(
+                                  icon: Icons.air,
+                                  title: currentWeather.formattedWind,
+                                  subtitle: 'Vento',
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: _WeatherIcon(
-                                icon: Icons.water_drop_outlined,
-                                title: currentWeather.formattedHumidity,
-                                subtitle: 'Umidità',
+                              Expanded(
+                                child: _WeatherIcon(
+                                  icon: Icons.water_drop_outlined,
+                                  title: currentWeather.formattedHumidity,
+                                  subtitle: 'Umidità',
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: _WeatherIcon(
-                                icon: Icons.thermostat,
-                                title: currentWeather.formattedTemp,
-                                subtitle: 'Temp. percepita',
+                              Expanded(
+                                child: _WeatherIcon(
+                                  icon: Icons.thermostat,
+                                  title: currentWeather.formattedTemp,
+                                  subtitle: 'Temp. percepita',
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      const ForecastWidget(),
-                    ]
-                  ],
+                        const ForecastWidget(),
+                      ]
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
       error: (error, stackTrace) => const Scaffold(
-        body: Column(
-          children: [
-            Icon(Icons.sentiment_very_dissatisfied),
-            Text('Qualcosa è andato storto'),
-          ],
+        body: SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.sentiment_very_dissatisfied),
+                Text('Qualcosa è andato storto'),
+              ],
+            ),
+          ),
         ),
       ),
       loading: () => const Scaffold(
-        body: Column(
-          children: [
-            Center(child: CircularProgressIndicator()),
-            SizedBox(height: 20),
-            Center(child: Text('Loading...')),
-          ],
+        body: SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 20),
+                Text('Loading...'),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -166,13 +178,12 @@ class _WeatherIcon extends StatelessWidget {
             Icon(
               icon,
               size: 48 / sizeFactor,
-              color: Colors.white,
             ),
+            const SizedBox(height: 4),
             AutoSizeText(
               title,
               maxLines: 1,
               style: textTheme.labelLarge?.copyWith(
-                color: Colors.white,
                 fontSize: textTheme.labelLarge?.fontSize ?? 0 / sizeFactor,
               ),
             ),
@@ -181,7 +192,6 @@ class _WeatherIcon extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: textTheme.labelSmall?.copyWith(
-                color: Colors.white,
                 fontSize: 10 / sizeFactor,
               ),
             ),
